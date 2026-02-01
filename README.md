@@ -36,12 +36,17 @@ or simply say "analyze tech debt" in any conversation
 
 ## Installation
 
-See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions.
-
-Quick install:
+**Quick Install:**
 ```bash
-cp skills/*.md ~/.claude/skills/
+./install.sh
 ```
+
+**Uninstall:**
+```bash
+./uninstall.sh
+```
+
+See [INSTALLATION.md](INSTALLATION.md) for detailed setup instructions and manual installation options.
 
 ## Usage
 

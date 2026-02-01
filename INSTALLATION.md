@@ -1,10 +1,22 @@
 # Installation Guide
 
-## Installing Skills
+## Quick Install (Recommended)
 
-To use the skills from this repository in Claude Code:
+Run the automated installer:
 
-### Option 1: Manual Installation (Recommended)
+```bash
+./install.sh
+```
+
+The installer will:
+- Create the Claude skills directory if needed
+- Backup any existing skills that would be overwritten
+- Install all skills from this repository
+- Show a summary of what was installed
+
+## Manual Installation Options
+
+### Option 1: Manual Copy
 
 1. **Locate your Claude skills directory**:
    ```bash
@@ -65,8 +77,20 @@ cp skills/*.md ~/.claude/skills/
 
 ## Uninstalling
 
-To remove a skill:
+### Quick Uninstall
+
+Run the automated uninstaller:
+
+```bash
+./uninstall.sh
+```
+
+### Manual Uninstall
+
+To remove skills manually:
 
 ```bash
 rm ~/.claude/skills/tech-debt.md
+# Or remove all skills from this repo:
+cd ~/.claude/skills && rm -f tech-debt.md
 ```
