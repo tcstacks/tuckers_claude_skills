@@ -34,6 +34,63 @@ Performs comprehensive technical debt analysis on your codebase.
 ```
 or simply say "analyze tech debt" in any conversation
 
+---
+
+### fullstack-e2e-stories
+
+Analyzes both frontend and backend in a git repo, extracts integrated user stories, and generates Playwright E2E tests.
+
+**Triggers**: `fullstack stories`, `e2e user stories`, `analyze full stack`, `playwright stories`, `extract all stories`, `full feature test`
+
+**What it does**:
+1. **Backend Analysis** - API routes, database models, business logic, auth flows
+2. **Frontend Analysis** - Pages, components, state management, UI interactions
+3. **Integration Mapping** - How frontend calls backend, data flow, API contracts
+4. **User Story Extraction** - Unified stories covering the full stack
+5. **Playwright E2E Testing** - Automated browser tests validating complete user flows
+
+**Output**:
+- `tasks/fullstack-e2e-prd.json` - ralph-tui compatible PRD for automated execution
+- `tests/e2e/*.spec.ts` - Playwright test files organized by category
+- `STORIES.md` - Human-readable story document
+
+**Run with ralph-tui**:
+```bash
+ralph-tui run --prd ./tasks/fullstack-e2e-prd.json --headless
+```
+
+**Story Categories**:
+- `AUTH-` Authentication (login, register, sessions)
+- `USER-` User management (profile, settings)
+- `DATA-` Data operations (CRUD, search, filter)
+- `FORM-` Form handling (validation, submission)
+- `NAV-` Navigation (routing, menus)
+- `RT-` Real-time (WebSockets, live updates)
+
+**Usage**:
+```
+/fullstack-e2e-stories
+```
+or say "analyze full stack" or "playwright stories" in any conversation
+
+---
+
+### create_frontend_user_stories
+
+Analyzes frontend codebase and creates user stories with Chrome MCP browser-based acceptance criteria.
+
+**Triggers**: `frontend stories`, `browser prd`, `chrome mcp stories`, `extract frontend features`
+
+**What it does**:
+- Explores frontend pages, components, and features
+- Generates user stories with browser verification criteria
+- Creates `prd.json` for ralph-tui execution
+
+**Usage**:
+```
+/create_frontend_user_stories
+```
+
 ## Installation
 
 **Quick Install:**
