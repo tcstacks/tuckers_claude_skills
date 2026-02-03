@@ -90,7 +90,11 @@ Run the automated uninstaller:
 To remove skills manually:
 
 ```bash
-rm ~/.claude/skills/tech-debt.md
-# Or remove all skills from this repo:
-cd ~/.claude/skills && rm -f tech-debt.md
+# Remove individual skills (directory-based structure)
+rm -rf ~/.claude/skills/tech-debt
+rm -rf ~/.claude/skills/fullstack-e2e-stories
+rm -rf ~/.claude/skills/create_frontend_user_stories
+
+# Or remove all skills from this repo at once:
+cd ~/.claude/skills && rm -rf tech-debt fullstack-e2e-stories create_frontend_user_stories
 ```
