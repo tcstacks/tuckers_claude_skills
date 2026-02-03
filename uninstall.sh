@@ -45,11 +45,11 @@ confirm_uninstall() {
     local found=false
     for skill_file in "$SKILLS_SOURCE_DIR"/*.md; do
         [ -e "$skill_file" ] || continue
-        local basename=$(basename "$skill_file")
-        local skill_name="${basename%.md}"
-        local dest_file="$CLAUDE_SKILLS_DIR/$basename"
+        local skill_name=$(basename "$skill_file" .md)
+        local dest_dir="$CLAUDE_SKILLS_DIR/$skill_name"
+        local old_dest_file="$CLAUDE_SKILLS_DIR/${skill_name}.md"
 
-        if [ -f "$dest_file" ]; then
+        if [ -d "$dest_dir" ] || [ -f "$old_dest_file" ]; then
             echo "  - $skill_name"
             found=true
         fi
@@ -80,12 +80,25 @@ uninstall_skills() {
     for skill_file in "$SKILLS_SOURCE_DIR"/*.md; do
         [ -e "$skill_file" ] || continue
 
-        local basename=$(basename "$skill_file")
-        local skill_name="${basename%.md}"
-        local dest_file="$CLAUDE_SKILLS_DIR/$basename"
+        local skill_name=$(basename "$skill_file" .md)
+        local dest_dir="$CLAUDE_SKILLS_DIR/$skill_name"
+        local old_dest_file="$CLAUDE_SKILLS_DIR/${skill_name}.md"
 
-        if [ -f "$dest_file" ]; then
-            rm "$dest_file"
+        local found=false
+
+        # Remove new directory structure
+        if [ -d "$dest_dir" ]; then
+            rm -rf "$dest_dir"
+            found=true
+        fi
+
+        # Remove old file-based structure (for backwards compatibility)
+        if [ -f "$old_dest_file" ]; then
+            rm "$old_dest_file"
+            found=true
+        fi
+
+        if [ "$found" = true ]; then
             print_success "Removed: $skill_name"
             ((removed++))
         else

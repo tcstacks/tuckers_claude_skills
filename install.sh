@@ -73,8 +73,9 @@ backup_existing_skills() {
     # Check if any of our skills would overwrite existing ones
     for skill_file in "$SKILLS_SOURCE_DIR"/*.md; do
         [ -e "$skill_file" ] || continue
-        local basename=$(basename "$skill_file")
-        if [ -f "$CLAUDE_SKILLS_DIR/$basename" ]; then
+        local skill_name=$(basename "$skill_file" .md)
+        local skill_dir="$CLAUDE_SKILLS_DIR/$skill_name"
+        if [ -d "$skill_dir" ] || [ -f "$CLAUDE_SKILLS_DIR/${skill_name}.md" ]; then
             backup_needed=true
             break
         fi
@@ -102,7 +103,11 @@ install_skills() {
 
         local basename=$(basename "$skill_file")
         local skill_name="${basename%.md}"
-        local dest_file="$CLAUDE_SKILLS_DIR/$basename"
+        local dest_dir="$CLAUDE_SKILLS_DIR/$skill_name"
+        local dest_file="$dest_dir/SKILL.md"
+
+        # Create skill directory if it doesn't exist
+        mkdir -p "$dest_dir"
 
         if [ -f "$dest_file" ]; then
             # Check if files are different
